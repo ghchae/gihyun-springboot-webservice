@@ -3,23 +3,30 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
+    private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+    private final MemberRepository memberRepository;
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     public Long join(Member member) {
 
         validateDuplicateMember(member);
 
         memberRepository.save(member);
-            return member.getId();
-        }
+        return member.getId();
+    }
     private void validateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName()).ifPresent(m -> {
+            logger.info("이미존재하는 회원");
             throw new IllegalStateException("이미 존재하는 회원입니다");
         });
     }
