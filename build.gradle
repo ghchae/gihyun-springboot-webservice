@@ -25,10 +25,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile('org.springframework.boot:spring-boot-starter-web')
-
-    compile('org.springframework.session:spring-session-jdbc')
-
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
