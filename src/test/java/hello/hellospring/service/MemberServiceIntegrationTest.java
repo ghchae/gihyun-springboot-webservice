@@ -1,33 +1,28 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemberServiceTest {
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-    @Before
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-    @After
-    public void afterEach() {
-        memberRepository.clearStore();
-    }
+@SpringBootTest
+//@Transactional
+public class MemberServiceIntegrationTest {
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository;
 
     @Test
     public void 회원가입() {
         //given
         Member member = new Member();
-        member.setName("gihyun");
+        member.setName("spring");
         //when
         Long saveId = memberService.join(member);
         //then
@@ -48,11 +43,5 @@ public class MemberServiceTest {
 
         //then
     }
-    @Test
-    public void findMembers() {
-    }
 
-    @Test
-    public void findOne() {
-    }
 }
