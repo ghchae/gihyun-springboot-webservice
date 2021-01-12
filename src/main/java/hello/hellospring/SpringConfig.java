@@ -40,8 +40,4 @@ public class SpringConfig {
         //return new JpaMemberRepository(em);
 
     //}
-    @Bean
-    public TimeTraceAop TimeTraceAop() {
-        return new TimeTraceAop();
-    }
 }
