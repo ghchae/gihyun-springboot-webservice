@@ -40,5 +40,9 @@ public class MemberServiceIntegrationTest {
 
         //then
     }
+    @Test
+    public void 회원조회() {
+
+    }
 
 }
